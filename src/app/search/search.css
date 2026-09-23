@@ -1,0 +1,32 @@
+.field {
+  margin-bottom: 2rem;
+}
+
+input {
+  width: min(560px, 100%);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem;
+  padding: 0.7rem 1.2rem;
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--accent);
+}
+
+input::placeholder {
+  color: var(--text-muted);
+}
+
+input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.hint {
+  color: var(--text-muted);
+  padding: 2rem 0;
+}

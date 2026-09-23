@@ -1,5 +1,45 @@
 # CinemAngular
 
+Sito cinema basato sulle API di [TMDB](https://www.themoviedb.org): film, serie TV, persone e ricerca.
+
+## Credenziali TMDB
+
+Il token sta in `src/environments/environment.ts`: è l'**API Read Access Token (v4)**,
+che si ottiene su themoviedb.org in Impostazioni account → API.
+
+Viene inviato come `Authorization: Bearer <token>` in ogni chiamata, come previsto dalla
+specifica; ad aggiungerlo è `src/app/core/tmdb-auth-interceptor.ts`.
+
+## Avvio
+
+```bash
+npm install
+npm start
+```
+
+L'app è su `http://localhost:4200/`.
+
+## Test
+
+```bash
+npm test
+```
+
+## Struttura
+
+| Cartella | Contenuto |
+| --- | --- |
+| `services/tmdb.ts` | tutte le chiamate alle API TMDB |
+| `core/tmdb-auth-interceptor.ts` | aggiunge `Authorization: Bearer <token>` e la lingua |
+| `models/` | tipi delle risposte TMDB e forma normalizzata usata dalle card |
+| `pipes/tmdb-image-pipe.ts` | compone gli URL delle immagini |
+| `shared/` | card, griglia, barra di ricerca, spinner |
+| `home/` `media-list/` `details/` `people/` `person/` `search/` | le pagine |
+
+---
+
+## Note Angular CLI
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.8.
 
 ## Development server

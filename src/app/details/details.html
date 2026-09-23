@@ -1,6 +1,98 @@
-<section>
-    <h1>Pagina Dettaglio</h1>
+@if (detailsResource.isLoading()) {
+  <app-spinner label="Caricamento scheda…" />
+} @else if (detailsResource.error()) {
+  <div class="page">
+    <p class="error">
+      Scheda non disponibile: il titolo non esiste o TMDB non ha risposto.
+      <button type="button" (click)="detailsResource.reload()">Riprova</button>
+    </p>
+  </div>
+} @else if (detailsResource.value(); as details) {
+  <article>
+    <header class="hero">
+      @if (details.backdrop_path) {
+        <img
+          class="hero-bg"
+          [src]="details.backdrop_path | tmdbImage: 'w1280'"
+          alt=""
+          aria-hidden="true"
+        />
+      }
 
-    <div>
+      <div class="hero-inner">
+        <div class="poster">
+          @if (details.poster_path) {
+            <img
+              [src]="details.poster_path | tmdbImage: 'w342'"
+              [alt]="'Locandina di ' + title()"
+            />
+          } @else {
+            <span class="poster-placeholder" aria-hidden="true">🎬</span>
+          }
+        </div>
+
+        <div class="heading">
+          <h1>
+            {{ title() }}
+            @if (year()) {
+              <span class="year">({{ year() }})</span>
+            }
+          </h1>
+
+          @if (details.tagline) {
+            <p class="tagline">«{{ details.tagline }}»</p>
+          }
+
+          <ul class="facts">
+            @if (rating(); as vote) {
+              <li class="vote">
+                ★ {{ vote }}<span class="votes">/10 · {{ details.vote_count }} voti</span>
+              </li>
+            }
+            @if (runtime(); as time) {
+              <li>{{ time }}</li>
+            }
+            @if (seasons(); as info) {
+              <li>{{ info }}</li>
+            }
+          </ul>
+
+          @if (details.genres.length) {
+            <ul class="genres">
+              @for (genre of details.genres; track genre.id) {
+                <li class="chip">{{ genre.name }}</li>
+              }
+            </ul>
+          }
+
+          <h2 class="section-title">Trama</h2>
+          <p class="overview">
+            {{ details.overview || 'Trama non disponibile in italiano per questo titolo.' }}
+          </p>
+
+          @if (crew().length) {
+            <dl class="crew">
+              @for (entry of crew(); track entry.job) {
+                <div>
+                  <dt>{{ entry.job }}</dt>
+                  <dd>{{ entry.names }}</dd>
+                </div>
+              }
+            </dl>
+          }
+        </div>
+      </div>
+    </header>
+
+    <div class="page">
+      <section class="section">
+        <h2 class="section-title">Cast principale</h2>
+        <app-media-grid
+          [items]="cast()"
+          layout="row"
+          emptyMessage="Nessuna informazione sul cast."
+        />
+      </section>
     </div>
-</section>
+  </article>
+}

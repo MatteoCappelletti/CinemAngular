@@ -1,0 +1,27 @@
+<div class="page">
+  <h1 class="page-title">Persone</h1>
+  <p class="page-subtitle">Attori, registi e professionisti più popolari del momento</p>
+
+  @if (peopleResource.isLoading()) {
+    <app-spinner />
+  } @else if (peopleResource.error()) {
+    <p class="error">
+      Non è stato possibile caricare l'elenco delle persone.
+      <button type="button" (click)="peopleResource.reload()">Riprova</button>
+    </p>
+  } @else {
+    <app-media-grid [items]="people()" emptyMessage="Nessuna persona trovata." />
+
+    @if (totalPages() > 1) {
+      <nav class="pagination" aria-label="Paginazione">
+        <button type="button" [disabled]="page() <= 1" (click)="goToPage(page() - 1)">
+          ← Precedente
+        </button>
+        <span>Pagina {{ page() }} di {{ totalPages() }}</span>
+        <button type="button" [disabled]="page() >= totalPages()" (click)="goToPage(page() + 1)">
+          Successiva →
+        </button>
+      </nav>
+    }
+  }
+</div>

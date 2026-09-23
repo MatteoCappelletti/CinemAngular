@@ -1,0 +1,134 @@
+.hero {
+  position: relative;
+  padding: 2.5rem var(--page-padding) 2rem;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.3) saturate(0.85);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--bg), rgb(11 14 20 / 0.75));
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.poster {
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface-2);
+  aspect-ratio: 2 / 3;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 16px 40px rgb(0 0 0 / 0.5);
+}
+
+.poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.poster-placeholder {
+  font-size: 3rem;
+  opacity: 0.35;
+}
+
+h1 {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  line-height: 1.15;
+}
+
+.year {
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.tagline {
+  margin: 0 0 1rem;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.facts {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.vote {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.votes {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.genres {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0 0 1.75rem;
+  padding: 0;
+}
+
+.overview {
+  margin: 0 0 1.75rem;
+  max-width: 70ch;
+}
+
+.crew {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.9rem 1.5rem;
+  margin: 0;
+}
+
+.crew dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.crew dd {
+  margin: 0.15rem 0 0;
+  font-size: 0.92rem;
+}
+
+@media (max-width: 760px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .poster {
+    width: 160px;
+  }
+}

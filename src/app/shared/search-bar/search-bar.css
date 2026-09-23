@@ -1,0 +1,52 @@
+.search {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: var(--surface-2);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.25rem 0.35rem 0.25rem 0.9rem;
+  transition: border-color 0.15s ease;
+}
+
+.search:focus-within {
+  border-color: var(--accent);
+}
+
+input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9rem;
+  padding: 0.35rem 0;
+  outline: none;
+}
+
+input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Rimuove la "x" nativa di Safari/Chrome, che stona con il resto della barra. */
+input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+button {
+  border: none;
+  background: var(--accent);
+  color: var(--bg);
+  border-radius: 999px;
+  width: 2rem;
+  height: 2rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+button:hover {
+  filter: brightness(1.1);
+}

@@ -1,0 +1,85 @@
+.layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.profile {
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface-2);
+  aspect-ratio: 2 / 3;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1.75rem;
+}
+
+.profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-placeholder {
+  font-size: 3rem;
+  opacity: 0.35;
+}
+
+.side-title {
+  font-size: 1rem;
+  margin: 0 0 0.75rem;
+}
+
+.facts {
+  margin: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.facts dt {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.facts dd {
+  margin: 0.15rem 0 0;
+  font-size: 0.92rem;
+}
+
+.biography {
+  max-width: 75ch;
+  white-space: pre-line;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.show-all {
+  margin-top: 1.5rem;
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.5rem 1.3rem;
+  font: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.show-all:hover {
+  border-color: var(--accent);
+}
+
+@media (max-width: 800px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+  .profile {
+    width: 180px;
+  }
+}

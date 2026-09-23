@@ -1,0 +1,9 @@
+@if (items().length) {
+  <div [class]="layout() === 'row' ? 'row' : 'grid'">
+    @for (item of items(); track item.mediaType + '-' + item.id + '-' + $index) {
+      <app-media-card [item]="item" />
+    }
+  </div>
+} @else {
+  <p class="empty">{{ emptyMessage() }}</p>
+}

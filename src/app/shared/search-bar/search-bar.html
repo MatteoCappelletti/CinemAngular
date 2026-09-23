@@ -1,0 +1,13 @@
+<form class="search" role="search" (ngSubmit)="submit()">
+  <label class="sr-only" for="search-input">Cerca film, serie TV e persone</label>
+  <input
+    id="search-input"
+    type="search"
+    name="q"
+    placeholder="Cerca film, serie o persone…"
+    autocomplete="off"
+    [ngModel]="query()"
+    (ngModelChange)="query.set($event)"
+  />
+  <button type="submit" aria-label="Cerca">🔍</button>
+</form>

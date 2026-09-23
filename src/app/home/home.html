@@ -1,12 +1,72 @@
-<section>
-  <h1>Pagina Home</h1>
+@if (hero(); as movie) {
+  <section class="hero">
+    <img
+      class="hero-bg"
+      [src]="movie.backdrop_path | tmdbImage: 'w1280'"
+      alt=""
+      aria-hidden="true"
+    />
+    <div class="hero-content">
+      <p class="hero-label">In evidenza</p>
+      <h1>{{ movie.title }}</h1>
+      <p class="hero-overview">{{ movie.overview }}</p>
+      <a class="hero-cta" [routerLink]="['/film', movie.id]">Vai alla scheda</a>
+    </div>
+  </section>
+}
 
-  <div id="popular">
-  </div>
+<div class="page">
+  <section class="section">
+    <div class="section-head">
+      <h2 class="section-title">Film popolari</h2>
+      <a routerLink="/film">Vedi tutti →</a>
+    </div>
 
-  <div id="genre">
-  </div>
+    @if (moviesResource.isLoading()) {
+      <app-spinner />
+    } @else if (moviesResource.error()) {
+      <p class="error">
+        Non è stato possibile caricare i film popolari.
+        <button type="button" (click)="moviesResource.reload()">Riprova</button>
+      </p>
+    } @else {
+      <app-media-grid [items]="movies()" layout="row" />
+    }
+  </section>
 
-  <div id="people">
-  </div>
-</section>
+  <section class="section">
+    <div class="section-head">
+      <h2 class="section-title">Serie TV popolari</h2>
+      <a routerLink="/serie">Vedi tutte →</a>
+    </div>
+
+    @if (tvResource.isLoading()) {
+      <app-spinner />
+    } @else if (tvResource.error()) {
+      <p class="error">
+        Non è stato possibile caricare le serie popolari.
+        <button type="button" (click)="tvResource.reload()">Riprova</button>
+      </p>
+    } @else {
+      <app-media-grid [items]="tvShows()" layout="row" />
+    }
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2 class="section-title">Persone popolari</h2>
+      <a routerLink="/persone">Vedi tutte →</a>
+    </div>
+
+    @if (peopleResource.isLoading()) {
+      <app-spinner />
+    } @else if (peopleResource.error()) {
+      <p class="error">
+        Non è stato possibile caricare le persone popolari.
+        <button type="button" (click)="peopleResource.reload()">Riprova</button>
+      </p>
+    } @else {
+      <app-media-grid [items]="people()" layout="row" />
+    }
+  </section>
+</div>

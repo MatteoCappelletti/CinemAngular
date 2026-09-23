@@ -1,7 +1,14 @@
 <header class="menu">
+  <a class="brand" routerLink="/"> <span aria-hidden="true">🎬</span> CinemAngular </a>
+
   <nav>
     <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a routerLink="/film" routerLinkActive="active">Film</a>
+    <a routerLink="/serie" routerLinkActive="active">Serie TV</a>
+    <a routerLink="/persone" routerLinkActive="active">Persone</a>
   </nav>
+
+  <app-search-bar />
 </header>
 
 <main>
@@ -9,5 +16,13 @@
 </main>
 
 <footer>
-  <p>&copy; 2026 - CinemAngular - Gruppo: Matteo Cappelletti, Matteo Primavesi, Simone Giussani, Andrea Manzoni, Simone Zerilli </p>
+  <p>
+    &copy; {{ year }} — {{ title }} — Gruppo: Matteo Cappelletti, Matteo Primavesi, Simone Giussani,
+    Andrea Manzoni, Simone Zerilli
+  </p>
+  <p class="credit">
+    Dati e immagini forniti da
+    <a href="https://www.themoviedb.org" target="_blank" rel="noopener noreferrer">TMDB</a>. Questo
+    prodotto non è approvato né certificato da TMDB.
+  </p>
 </footer>

@@ -1,0 +1,50 @@
+<div class="page">
+  <h1 class="page-title">Ricerca</h1>
+  <p class="page-subtitle">Film, serie TV e persone in un'unica ricerca</p>
+
+  <div class="field">
+    <label class="sr-only" for="search-page-input">Cerca</label>
+    <input
+      id="search-page-input"
+      type="search"
+      autocomplete="off"
+      placeholder="Titolo, attore, regista…"
+      [ngModel]="query()"
+      (ngModelChange)="query.set($event)"
+    />
+  </div>
+
+  @if (!activeQuery()) {
+    <p class="hint">Scrivi qualcosa per iniziare la ricerca.</p>
+  } @else if (resultsResource.isLoading()) {
+    <app-spinner label="Ricerca in corso…" />
+  } @else if (resultsResource.error()) {
+    <p class="error">
+      La ricerca non è andata a buon fine.
+      <button type="button" (click)="resultsResource.reload()">Riprova</button>
+    </p>
+  } @else if (totalResults() === 0) {
+    <p class="hint">Nessun risultato per «{{ activeQuery() }}».</p>
+  } @else {
+    @if (movies().length) {
+      <section class="section">
+        <h2 class="section-title">Film ({{ movies().length }})</h2>
+        <app-media-grid [items]="movies()" />
+      </section>
+    }
+
+    @if (tvShows().length) {
+      <section class="section">
+        <h2 class="section-title">Serie TV ({{ tvShows().length }})</h2>
+        <app-media-grid [items]="tvShows()" />
+      </section>
+    }
+
+    @if (people().length) {
+      <section class="section">
+        <h2 class="section-title">Persone ({{ people().length }})</h2>
+        <app-media-grid [items]="people()" />
+      </section>
+    }
+  }
+</div>

@@ -1,0 +1,29 @@
+<a class="card" [routerLink]="link()" [attr.aria-label]="item().title">
+  <div class="poster">
+    @if (item().imagePath) {
+      <img
+        [src]="item().imagePath | tmdbImage: 'w342'"
+        [alt]="item().title"
+        loading="lazy"
+        decoding="async"
+      />
+    } @else {
+      <span class="placeholder" aria-hidden="true">
+        {{ item().mediaType === 'person' ? '👤' : '🎬' }}
+      </span>
+    }
+
+    @if (rating(); as vote) {
+      <span class="rating" [class.rating--high]="item().voteAverage! >= 7">★ {{ vote }}</span>
+    }
+  </div>
+
+  <div class="info">
+    <h3 class="title">{{ item().title }}</h3>
+    @if (item().subtitle) {
+      <p class="subtitle">{{ item().subtitle }}</p>
+    } @else if (year()) {
+      <p class="subtitle">{{ year() }}</p>
+    }
+  </div>
+</a>

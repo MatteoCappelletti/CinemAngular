@@ -1,0 +1,100 @@
+@if (personResource.isLoading()) {
+  <app-spinner label="Caricamento scheda…" />
+} @else if (personResource.error()) {
+  <div class="page">
+    <p class="error">
+      Scheda non disponibile: la persona non esiste o TMDB non ha risposto.
+      <button type="button" (click)="personResource.reload()">Riprova</button>
+    </p>
+  </div>
+} @else if (personResource.value(); as person) {
+  <article class="page">
+    <div class="layout">
+      <aside>
+        <div class="profile">
+          @if (person.profile_path) {
+            <img [src]="person.profile_path | tmdbImage: 'w342'" [alt]="'Foto di ' + person.name" />
+          } @else {
+            <span class="profile-placeholder" aria-hidden="true">👤</span>
+          }
+        </div>
+
+        <h2 class="side-title">Dati anagrafici</h2>
+        <dl class="facts">
+          @if (person.known_for_department) {
+            <div>
+              <dt>Ruolo principale</dt>
+              <dd>{{ person.known_for_department }}</dd>
+            </div>
+          }
+          @if (genderLabel(); as gender) {
+            <div>
+              <dt>Genere</dt>
+              <dd>{{ gender }}</dd>
+            </div>
+          }
+          @if (person.birthday) {
+            <div>
+              <dt>Nascita</dt>
+              <dd>
+                {{ person.birthday | date: 'd MMMM y' }}
+                @if (age() !== null) {
+                  <span class="muted">({{ age() }} anni)</span>
+                }
+              </dd>
+            </div>
+          }
+          @if (person.deathday) {
+            <div>
+              <dt>Morte</dt>
+              <dd>{{ person.deathday | date: 'd MMMM y' }}</dd>
+            </div>
+          }
+          @if (person.place_of_birth) {
+            <div>
+              <dt>Luogo di nascita</dt>
+              <dd>{{ person.place_of_birth }}</dd>
+            </div>
+          }
+        </dl>
+      </aside>
+
+      <div class="main">
+        <h1 class="page-title">{{ person.name }}</h1>
+
+        <section class="section">
+          <h2 class="section-title">Biografia</h2>
+          @if (biography()) {
+            <p class="biography">{{ biography() }}</p>
+          } @else {
+            <p class="muted">Nessuna biografia disponibile in italiano per questa persona.</p>
+          }
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Filmografia</h2>
+
+          @if (creditsResource.isLoading()) {
+            <app-spinner />
+          } @else if (creditsResource.error()) {
+            <p class="error">
+              Non è stato possibile caricare la filmografia.
+              <button type="button" (click)="creditsResource.reload()">Riprova</button>
+            </p>
+          } @else {
+            <app-media-grid
+              [items]="visibleFilmography()"
+              emptyMessage="Nessun film o serie associato a questa persona."
+            />
+
+            @if (hasMoreCredits() && !showAllCredits()) {
+              <button class="show-all" type="button" (click)="showAllCredits.set(true)">
+                Mostra tutti i {{ filmography().length }} titoli
+              </button>
+            }
+          }
+        </section>
+      </div>
+    </div>
+  </article>
+}

@@ -1,1 +1,134 @@
-/* You can add global styles to this file, and also import other style files */
+/* ------------------------------------------------------------------ Tema */
+
+:root {
+  color-scheme: dark;
+
+  --bg: #0b0e14;
+  --surface-1: #151a23;
+  --surface-2: #1e2430;
+  --border: #2a3240;
+
+  --text: #e8ecf3;
+  --text-muted: #939eb0;
+
+  --accent: #f5c518; /* giallo "locandina", usato per voti e stati attivi */
+  --danger: #ff6b6b;
+
+  --radius: 12px;
+  --page-padding: clamp(1rem, 4vw, 3rem);
+  --max-width: 1400px;
+}
+
+/* ------------------------------------------------------------- Reset base */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* -------------------------------------------------------- Utility comuni */
+
+/* Contenitore standard delle pagine. */
+.page {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem var(--page-padding) 0;
+}
+
+.page-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin: 0 0 0.25rem;
+}
+
+.page-subtitle {
+  margin: 0 0 1.5rem;
+  color: var(--text-muted);
+}
+
+.section {
+  margin-bottom: 2.75rem;
+}
+
+.section-title {
+  font-size: 1.15rem;
+  margin: 0 0 0.9rem;
+}
+
+/* Messaggio di errore mostrato quando una chiamata TMDB fallisce. */
+.error {
+  border: 1px solid var(--danger);
+  background: rgb(255 107 107 / 0.08);
+  color: var(--danger);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.error button {
+  margin-left: 0.75rem;
+  background: none;
+  border: 1px solid currentColor;
+  color: inherit;
+  border-radius: 999px;
+  padding: 0.2rem 0.8rem;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.chip {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+/* Testo leggibile solo dagli screen reader. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
